@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Text Summarizer</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>AI Text Summarizer /ᐠ˵- ⩊ -˵マ💭</h1>
+    <textarea id="inputText" class="input-area" rows="10" cols="50" placeholder="Paste your text here..."></textarea>
+    <button class="summarize-btn" onclick="summarizeText()">Summarize ✨</button>
+
+    <div id="spinner" class="spinner hidden"></div>
+
+    <h2>Summary📝</h2>
+    <h2>❀˖°──── ୨୧ ────⊹₊⟡⋆</h2>
+    <p id="summaryOutput" class="summary-output"></p>
+  </div>
+
+  <script>
+  async function summarizeText() {
+  const inputText = document.getElementById("inputText").value;
+  const spinner = document.getElementById("spinner");
+  const summaryOutput = document.getElementById("summaryOutput");
+
+  summaryOutput.textContent = "";
+  spinner.classList.remove("hidden");
+
+  try {
+    const response = await fetch("http://localhost:3000/api/summarize", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text: inputText }),
+    });
+
+    const data = await response.json();
+    summaryOutput.textContent = data.summary;
+  } catch (error) {
+    summaryOutput.textContent = "An error occurred. Please try again later.";
+  } finally {
+    spinner.classList.add("hidden");
+  }
+}
+</script>
+</body>
+</html>
