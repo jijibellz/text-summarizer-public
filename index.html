@@ -28,7 +28,7 @@
   spinner.classList.remove("hidden");
 
   try {
-    const response = await fetch("https://text-summarizer-public.onrender.com", {
+    const response = await fetch("https://text-summarizer-public.onrender.com/api/summarize", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ text: inputText }),
